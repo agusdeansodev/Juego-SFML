@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include "Player.h"
 #include "Coin.h"
+#include "PowerUp.h"
 
 
 int main()
@@ -29,6 +30,10 @@ int main()
     Coin Moneda;
 
     Moneda.respanw();
+
+    PowerUp paltaNutritiva;
+    int timer = 0;
+
    
 
     // READINPUT ACTUALIZAR LOS PERIFERICOS
@@ -42,14 +47,26 @@ int main()
                 window.close();
         }
         //CMD - joy EJECUTAR COMANDOS (ARRIBA,ABAJO,ETC)
+       
         playerUno.Update();
         playerUno.NoSaleDePantalla();
         Moneda.NoSaleDeLaPantallaCoin();
+        paltaNutritiva.NoSaleDeLaPantallaPower();
 
         if (playerUno.isCollision(Moneda)) {
             Moneda.respanw();
             puntos++;
 
+        }
+
+        if (timer > 0) {
+            timer--;
+        }
+
+        if (timer == 0 && playerUno.isCollision(paltaNutritiva)) {
+            playerUno.addVelocity(0.3);
+            timer = 60 * 5;
+            paltaNutritiva.respanw();
         }
 
         text.setString("Puntos"+std::to_string(puntos));
@@ -62,6 +79,10 @@ int main()
         window.draw(Moneda);
         window.draw(text);
 
+        if (timer == 0) {
+            window.draw(paltaNutritiva);
+        }
+        
         //Display - Flip
         window.display();
         

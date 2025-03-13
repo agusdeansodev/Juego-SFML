@@ -7,6 +7,7 @@ public:
     Player();
     void Update();
     void NoSaleDePantalla();
+    void addVelocity(float aumentoVel);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
 

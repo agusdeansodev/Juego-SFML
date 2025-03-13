@@ -82,6 +82,10 @@ void Player::NoSaleDePantalla() {
 
 }
 
+void Player::addVelocity(float aumentoVel) {
+    velocity += {aumentoVel,aumentoVel};
+}
+
 sf::FloatRect Player::getBounds() const {
     return sprite.getGlobalBounds();
 }
